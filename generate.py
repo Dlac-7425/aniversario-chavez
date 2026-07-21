@@ -314,7 +314,7 @@ HTML = f'''<!DOCTYPE html>
 </html>
 '''
 
-with open(HTML_PATH, 'w') as f:
+with open(HTML_PATH, 'w', encoding='utf-8') as f:
     f.write(HTML)
 
 print(f'OK — {GALLERY_COUNT} fotos en galería, 3 moments, 1 featured.')
