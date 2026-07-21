@@ -699,7 +699,6 @@ a.featured-photo:hover .featured-frame {
   margin: 0 0 3rem;
   user-select: none;
   opacity: 0;
-  transform: translateY(15px);
 }
 
 .closing-message {
@@ -712,7 +711,6 @@ a.featured-photo:hover .featured-frame {
   margin: 0 auto;
   letter-spacing: 0.005em;
   opacity: 0;
-  transform: translateY(25px);
 }
 
 /* --------------------------------

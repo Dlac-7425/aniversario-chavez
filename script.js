@@ -1,17 +1,18 @@
 /* ============================================================
    script.js
-   - Intro orchestration
-   - GSAP hero timeline (corre al cerrar el intro)
-   - GSAP ScrollTrigger para reveals on-scroll
-   - PhotoSwipe v5 lightbox (carrusel unificado de las 64 fotos)
+   Optimizaciones para evitar parpadeo y problemas de rendimiento:
+   - Sin `scale` (subpixel rendering en imágenes)
+   - `gsap.set()` para estado inicial + `gsap.to()` (sin salto de `fromTo`)
+   - `force3D: false` en set() y en galería (no crea capas compositor)
+   - `clearProps: 'transform'` (libera GPU, mantiene opacity inline)
+   - `lazy: true` en ScrollTriggers
+   - Sin `elastic` (rebotes que causan parpadeo)
+   - `will-change` NO se usa (sería contraproducente)
    ============================================================ */
 
 (function () {
   'use strict';
 
-  // ============================================================
-  // 0. Esperar a que todas las librerías carguen antes de inicializar
-  // ============================================================
   function whenReady(cb) {
     if (typeof gsap !== 'undefined' && typeof PhotoSwipe !== 'undefined' && typeof PhotoSwipeLightbox !== 'undefined') {
       cb();
@@ -26,15 +27,13 @@
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
     }
-
     initIntro();
-    initHeroAnimations();
-    initScrollReveals();
+    initScrollAnimations();
     initLightbox();
   }
 
   // ============================================================
-  // 1. INTRO — overlay de bienvenida
+  // 1. INTRO
   // ============================================================
   function initIntro() {
     const intro = document.getElementById('intro');
@@ -42,10 +41,11 @@
     if (!intro || !introButton) {
       document.body.classList.add('intro-done');
       document.body.classList.remove('intro-active');
+      playOpeningTimeline();
       return;
     }
 
-    // Preload imágenes visibles en background mientras corre la intro
+    // Preload imágenes visibles
     document.querySelectorAll('img').forEach((img) => {
       const src = img.getAttribute('src');
       if (!src || img.complete) return;
@@ -55,9 +55,7 @@
     });
 
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        intro.classList.add('is-active');
-      });
+      requestAnimationFrame(() => intro.classList.add('is-active'));
     });
 
     introButton.addEventListener('click', dismissIntro);
@@ -79,145 +77,131 @@
       document.body.classList.remove('intro-active');
       document.body.classList.add('intro-done');
 
-      // Cuando termina la transición, removemos y disparamos el hero
       setTimeout(() => {
         if (intro.parentNode) intro.parentNode.removeChild(intro);
-        playHeroTimeline();
+        playOpeningTimeline();
       }, 950);
     }
   }
 
   // ============================================================
-  // 2. HERO — animación con GSAP (corre al cerrar el intro)
+  // 2. OPENING TIMELINE — polaroid entrance
   // ============================================================
-  let heroPlayed = false;
+  let openingPlayed = false;
+  function playOpeningTimeline() {
+    if (openingPlayed) return;
+    openingPlayed = true;
+    if (typeof gsap === 'undefined') return;
 
-  function playHeroTimeline() {
-    if (heroPlayed) return;
-    heroPlayed = true;
-
-    if (typeof gsap === 'undefined') {
-      // Fallback sin GSAP: simplemente hacemos visibles
-      document.querySelectorAll('.hero-eyebrow, .hero-date, .hero-title, .hero-decoration, .hero-message, .scroll-hint, .hero-rule')
-        .forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none'; });
-      return;
-    }
+    // Estado inicial con gsap.set (sin parpadeo, sin capas innecesarias)
+    gsap.set('.section-eyebrow', { opacity: 0, y: 18, force3D: false });
+    gsap.set('.featured-frame', { opacity: 0, y: 40, rotate: -4, force3D: false });
+    gsap.set('.featured-caption', { opacity: 0, y: 18, force3D: false });
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-    tl.from('.hero-eyebrow',   { y: 20, opacity: 0, duration: 0.9 }, 0)
-      .from('.hero-date-day',  { y: 80, opacity: 0, duration: 1.4, ease: 'expo.out' }, 0.1)
-      .from('.hero-date-month',{ y: 30, opacity: 0, duration: 0.9 }, '-=0.7')
-      .from('.hero-rule',      { width: 0, opacity: 0, duration: 1.0 }, '-=0.3')
-      .from('.hero-title',     { y: 30, opacity: 0, duration: 1.0 }, '-=0.5')
-      .from('.hero-decoration',{ scale: 0.4, opacity: 0, duration: 1.2, ease: 'back.out(2)' }, '-=0.5')
-      .from('.hero-message',   { y: 25, opacity: 0, duration: 1.0 }, '-=0.6')
-      .from('.scroll-hint',    { y: 20, opacity: 0, duration: 0.8 }, '-=0.4');
-  }
-
-  // Si el intro no existe (no-JS / hot-reload), arrancamos igual
-  function initHeroAnimations() {
-    if (!document.getElementById('intro')) {
-      setTimeout(playHeroTimeline, 100);
-    }
+    tl.to('.section-eyebrow', { opacity: 1, y: 0, duration: 0.8, force3D: false }, 0)
+      .to('.featured-frame', { opacity: 1, y: 0, rotate: -1.8, duration: 1.1, ease: 'power2.out', force3D: false }, 0.2)
+      .to('.featured-caption', { opacity: 1, y: 0, duration: 0.8, force3D: false }, 0.6)
+      .eventCallback('onComplete', () => {
+        // Libera sólo el transform (mantiene opacity inline = visible)
+        // y permite que el CSS hover transition funcione
+        gsap.set('.featured-frame', { clearProps: 'transform' });
+      });
   }
 
   // ============================================================
-  // 3. SCROLL REVEALS — GSAP ScrollTrigger
+  // 3. SCROLL ANIMATIONS
   // ============================================================
-  function initScrollReveals() {
+  function initScrollAnimations() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-      // Fallback: hace visibles
-      document.querySelectorAll('[data-reveal]').forEach((el) => {
+      // Fallback sin GSAP
+      document.querySelectorAll(
+        '[data-reveal], .moment-card, .gallery-item, .letter-stanza, .letter-divider, .letter-final, .letter-signature, .closing-divider, .closing-message, .featured-frame, .featured-caption, .section-eyebrow'
+      ).forEach((el) => {
         el.style.opacity = '1';
         el.style.transform = 'none';
       });
       return;
     }
 
-    // Revela cualquier elemento con data-reveal cuando entra en viewport
-    const revealItems = document.querySelectorAll('[data-reveal]');
-    revealItems.forEach((el) => {
+    // ---- Estado inicial (force3D: false evita crear capas de compositor) ----
+    gsap.set('[data-reveal]', { opacity: 0, y: 18, force3D: false });
+    gsap.set('.moment-card', { opacity: 0, y: 25, force3D: false });
+    gsap.set('.gallery-item', { opacity: 0, y: 18, force3D: false });
+    gsap.set('.letter-stanza, .letter-divider, .letter-final, .letter-signature', { opacity: 0, y: 18, force3D: false });
+    gsap.set('.closing-divider', { opacity: 0, y: 12, force3D: false });
+    gsap.set('.closing-message', { opacity: 0, y: 22, force3D: false });
+
+    // ---- data-reveal (eyebrows, titles, subs) ----
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
       gsap.to(el, {
-        opacity: 1,
-        y: 0,
+        opacity: 1, y: 0,
         duration: 1.0,
         ease: 'power3.out',
+        force3D: false,
         scrollTrigger: {
           trigger: el,
-          start: 'top 88%',
+          start: 'top 90%',
           toggleActions: 'play none none none',
+          lazy: true,
         },
+        onComplete: () => gsap.set(el, { clearProps: 'transform' }),
       });
     });
 
-    // Moment cards: stagger con entrada desde abajo
+    // ---- Moment cards (stagger) ----
     gsap.utils.toArray('.moment-card').forEach((card, i) => {
-      gsap.fromTo(card,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1, y: 0,
-          duration: 0.9,
-          delay: i * 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
+      gsap.to(card, {
+        opacity: 1, y: 0,
+        duration: 1.0,
+        delay: i * 0.12,
+        ease: 'power3.out',
+        force3D: false,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 88%',
+          toggleActions: 'play none none none',
+          lazy: true,
+        },
+        onComplete: () => gsap.set(card, { clearProps: 'transform' }),
+      });
     });
 
-    // Gallery items: stagger sutil al entrar
+    // ---- Gallery (batch, sin scale, sin force3D) ----
     ScrollTrigger.batch('.gallery-item', {
-      start: 'top 90%',
-      onEnter: (els) => {
-        gsap.fromTo(els,
-          { opacity: 0, y: 30, scale: 0.98 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.04, ease: 'power2.out' }
-        );
-      },
+      start: 'top 92%',
       once: true,
-    });
-
-    // Featured photo: entrada con scale
-    const featuredFrame = document.querySelector('.featured-frame');
-    if (featuredFrame) {
-      gsap.fromTo(featuredFrame,
-        { opacity: 0, scale: 0.85, rotate: -6 },
-        {
-          opacity: 1, scale: 1, rotate: -1.8,
-          duration: 1.2,
-          ease: 'elastic.out(1, 0.7)',
-          scrollTrigger: {
-            trigger: featuredFrame,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
-    }
-
-    // Letter stanzas: stagger entrada
-    gsap.utils.toArray('.letter-stanza, .letter-divider, .letter-final, .letter-signature').forEach((el, i) => {
-      gsap.fromTo(el,
-        { opacity: 0, y: 20 },
-        {
+      onEnter: (els) => {
+        gsap.to(els, {
           opacity: 1, y: 0,
-          duration: 0.9,
-          delay: i * 0.08,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
+          duration: 0.8,
+          stagger: 0.03,
+          ease: 'sine.out',
+          force3D: false,
+          onComplete: () => gsap.set(els, { clearProps: 'transform' }),
+        });
+      },
     });
 
-    // Closing: entrada lenta y serena
+    // ---- Letter stanzas (stagger) ----
+    gsap.utils.toArray('.letter-stanza, .letter-divider, .letter-final, .letter-signature').forEach((el, i) => {
+      gsap.to(el, {
+        opacity: 1, y: 0,
+        duration: 1.0,
+        delay: i * 0.1,
+        ease: 'power2.out',
+        force3D: false,
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+          lazy: true,
+        },
+        onComplete: () => gsap.set(el, { clearProps: 'transform' }),
+      });
+    });
+
+    // ---- Closing ----
     const closingDivider = document.querySelector('.closing-divider');
     const closingMessage = document.querySelector('.closing-message');
     if (closingDivider) {
@@ -225,7 +209,9 @@
         opacity: 0.7, y: 0,
         duration: 1.0,
         ease: 'sine.out',
-        scrollTrigger: { trigger: '.closing', start: 'top 80%', toggleActions: 'play none none none' },
+        force3D: false,
+        scrollTrigger: { trigger: '.closing', start: 'top 82%', toggleActions: 'play none none none', lazy: true },
+        onComplete: () => gsap.set(closingDivider, { clearProps: 'transform' }),
       });
     }
     if (closingMessage) {
@@ -234,25 +220,15 @@
         duration: 1.4,
         delay: 0.15,
         ease: 'sine.out',
-        scrollTrigger: { trigger: '.closing', start: 'top 80%', toggleActions: 'play none none none' },
+        force3D: false,
+        scrollTrigger: { trigger: '.closing', start: 'top 82%', toggleActions: 'play none none none', lazy: true },
+        onComplete: () => gsap.set(closingMessage, { clearProps: 'transform' }),
       });
     }
-
-    // Parallax sutil del hero al hacer scroll
-    gsap.to('.hero-content', {
-      y: -60,
-      opacity: 0.3,
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      },
-    });
   }
 
   // ============================================================
-  // 4. PHOTOSWIPE v5 — lightbox + carrusel unificado
+  // 4. PHOTOSWIPE v5
   // ============================================================
   function initLightbox() {
     if (typeof PhotoSwipe === 'undefined' || typeof PhotoSwipeLightbox === 'undefined') {
@@ -268,7 +244,6 @@
       padding: { top: 24, bottom: 24, left: 24, right: 24 },
       doubleTapAction: 'zoom',
       tapAction: 'close',
-      // Mobile-friendly
       pinchToClose: true,
       closeOnVerticalDrag: true,
     });
@@ -277,18 +252,16 @@
   }
 
   // ============================================================
-  // 5. SMOOTH ANCHOR SCROLL (para links # que NO son lightbox)
+  // 5. SMOOTH ANCHOR SCROLL
   // ============================================================
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[href^="#"]');
     if (!link) return;
-    if (link.hasAttribute('data-pswp-src')) return;  // no interceptar lightbox
-
+    if (link.hasAttribute('data-pswp-src')) return;
     const href = link.getAttribute('href');
     if (!href || href.length <= 1) return;
     const target = document.querySelector(href);
     if (!target) return;
-
     e.preventDefault();
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });

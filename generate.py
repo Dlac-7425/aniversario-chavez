@@ -198,51 +198,15 @@ HTML = f'''<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- HERO -->
-  <header class="hero" role="banner">
-    <div class="hero-bg" aria-hidden="true"></div>
-
-    <div class="hero-content">
-      <span class="hero-eyebrow">Hoy celebramos</span>
-
-      <h1 class="hero-date">
-        <span class="hero-date-day">21</span>
-        <span class="hero-date-month">de Julio</span>
-      </h1>
-
-      <div class="hero-rule" aria-hidden="true"></div>
-
-      <h2 class="hero-title">Para Daniela</h2>
-
-      <div class="hero-decoration" aria-hidden="true">
-        <svg viewBox="0 0 100 100" width="60" height="60">
-          <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.75">
-            <path d="M50 85 C 30 65, 20 50, 20 35 C 20 25, 28 18, 38 20 C 44 21, 48 25, 50 30 C 52 25, 56 21, 62 20 C 72 18, 80 25, 80 35 C 80 50, 70 65, 50 85 Z" />
-            <path d="M50 30 L 50 18" />
-            <path d="M50 22 L 45 17" />
-            <path d="M50 22 L 55 17" />
-          </g>
-        </svg>
-      </div>
-
-      <p class="hero-message">
-        Feliz aniversario, mi amor. Cada día a tu lado es el mejor regalo.
-        Gracias por hacer de este mundo un lugar más bonito.
-        Te amo más de lo que las palabras pueden expresar.
-      </p>
-
-      <a href="#carta" class="scroll-hint" aria-label="Leer la carta">
-        <span>leer la carta</span>
-        <svg width="20" height="32" viewBox="0 0 20 32" aria-hidden="true">
-          <path d="M10 0v28M2 22l8 8 8-8" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  </header>
-
-  <!-- CARTA (al inicio, sin eyebrow ni título) -->
-  <section id="carta" class="letter">
+  <!-- POLAROID + CARTA (combinados, primera sección post-intro) -->
+  <section class="featured-and-letter">
     <div class="container">
+      <p class="section-eyebrow">Para vos</p>
+{FEATURED_HTML}
+      <p class="featured-caption">Cada vez que te miro, me enamoro otra vez.</p>
+
+      <div class="featured-letter-divider" aria-hidden="true">·  ·  ·</div>
+
       <div class="letter-content">
         {LETTER_HTML}
         <p class="letter-final">Feliz aniversario, mi amor.</p>
