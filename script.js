@@ -94,17 +94,15 @@
     if (typeof gsap === 'undefined') return;
 
     // Estado inicial con gsap.set (sin parpadeo, sin capas innecesarias)
-    gsap.set('.section-eyebrow', { opacity: 0, y: 18, force3D: false });
-    gsap.set('.featured-frame', { opacity: 0, y: 40, rotate: -4, force3D: false });
-    gsap.set('.featured-caption', { opacity: 0, y: 18, force3D: false });
+    gsap.set('.letter-featured-eyebrow', { opacity: 0, y: 15, force3D: false });
+    gsap.set('.featured-frame', { opacity: 0, y: 30, rotate: -4, force3D: false });
+    gsap.set('.featured-caption', { opacity: 0, y: 15, force3D: false });
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    tl.to('.section-eyebrow', { opacity: 1, y: 0, duration: 0.8, force3D: false }, 0)
+    tl.to('.letter-featured-eyebrow', { opacity: 1, y: 0, duration: 0.8, force3D: false }, 0)
       .to('.featured-frame', { opacity: 1, y: 0, rotate: -1.8, duration: 1.1, ease: 'power2.out', force3D: false }, 0.2)
       .to('.featured-caption', { opacity: 1, y: 0, duration: 0.8, force3D: false }, 0.6)
       .eventCallback('onComplete', () => {
-        // Libera sólo el transform (mantiene opacity inline = visible)
-        // y permite que el CSS hover transition funcione
         gsap.set('.featured-frame', { clearProps: 'transform' });
       });
   }
@@ -116,7 +114,7 @@
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
       // Fallback sin GSAP
       document.querySelectorAll(
-        '[data-reveal], .moment-card, .gallery-item, .letter-stanza, .letter-divider, .letter-final, .closing-divider, .closing-message, .section-eyebrow'
+        '[data-reveal], .moment-card, .gallery-item, .letter-stanza, .letter-divider, .letter-final, .letter-featured-eyebrow, .featured-frame, .featured-caption, .closing-divider, .closing-message'
       ).forEach((el) => {
         el.style.opacity = '1';
         el.style.transform = 'none';

@@ -10,6 +10,13 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 IMG_DIR = os.path.join(ROOT, 'public', 'images')
 HTML_PATH = os.path.join(ROOT, 'index.html')
 
+# Música de fondo
+MUSIC_FILE = 'Sebastián Yatra - No hay nadie más  LETRA.mp3'
+MUSIC_SRC = 'public/music/' + urllib.parse.quote(MUSIC_FILE)
+
+# Foto principal — polaroid arriba de la carta
+MAIN = 'WhatsApp Image 2026-07-21 at 4.21.12 PM (4).jpeg'
+
 # 3 momentos
 MOMENTS = [
     ('WhatsApp Image 2026-07-21 at 4.21.05 PM.jpeg',
@@ -120,7 +127,7 @@ def build_moments():
 def build_gallery():
     files = sorted(os.listdir(IMG_DIR))
     moment_names = {m[0] for m in MOMENTS}
-    gallery_files = [f for f in files if f not in moment_names]
+    gallery_files = [f for f in files if f != MAIN and f not in moment_names]
     items = []
     for i, fn in enumerate(gallery_files):
         src = u(fn)
@@ -147,9 +154,26 @@ def build_letter():
     return '\n        '.join(parts)
 
 
+def build_featured_polaroid():
+    src = u(MAIN)
+    return (
+        f'<div class="letter-featured">\n'
+        f'  <p class="letter-featured-eyebrow">Para Daniela</p>\n'
+        f'  <a href="{src}" {img_attrs(MAIN)} class="featured-photo" target="_blank" rel="noreferrer">\n'
+        f'    <div class="featured-frame">\n'
+        f'      <img src="{src}" alt="Para Daniela" class="featured-image" loading="eager" decoding="async" />\n'
+        f'      <span class="featured-stamp">21 · 07 · 2026</span>\n'
+        f'    </div>\n'
+        f'  </a>\n'
+        f'  <p class="featured-caption">Cada vez que te miro, me enamoro otra vez.</p>\n'
+        f'</div>'
+    )
+
+
 MOMENTS_HTML = build_moments()
 GALLERY_HTML, GALLERY_COUNT = build_gallery()
 LETTER_HTML = build_letter()
+FEATURED_POLAROID_HTML = build_featured_polaroid()
 
 HTML = f'''<!DOCTYPE html>
 <html lang="es">
@@ -176,7 +200,7 @@ HTML = f'''<!DOCTYPE html>
   <!-- Fallback sin JS: muestra elementos animados -->
   <noscript>
     <style>
-      a.gallery-item, .moment-card, [data-reveal], .closing-divider, .closing-message, .letter-stanza, .letter-divider, .letter-final {{
+      a.gallery-item, .moment-card, [data-reveal], .closing-divider, .closing-message, .letter-stanza, .letter-divider, .letter-final, .letter-featured-eyebrow, .featured-frame, .featured-caption {{
         opacity: 1 !important;
         transform: none !important;
       }}
@@ -216,6 +240,7 @@ HTML = f'''<!DOCTYPE html>
   <!-- CARTA -->
   <section class="letter">
     <div class="container">
+{FEATURED_POLAROID_HTML}
       <div class="letter-content">
         {LETTER_HTML}
         <p class="letter-final">#HastaViejitosTodaLaVida ❤️🥹</p>
@@ -259,6 +284,22 @@ HTML = f'''<!DOCTYPE html>
       </p>
     </div>
   </section>
+
+  <!-- AUDIO DE FONDO (Sebastián Yatra - No hay nadie más) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="{MUSIC_SRC}" type="audio/mpeg" />
+  </audio>
+
+  <!-- BOTÓN TOGGLE DE MÚSICA -->
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Activar música">
+    <svg class="music-icon-play" width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M6 3.5 L17 10 L6 16.5 Z" />
+    </svg>
+    <svg class="music-icon-pause" width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <rect x="5.5" y="3.5" width="3" height="13" rx="0.8" />
+      <rect x="11.5" y="3.5" width="3" height="13" rx="0.8" />
+    </svg>
+  </button>
 
   <!-- PhotoSwipe v5 -->
   <script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/umd/photoswipe.umd.min.js" defer></script>
