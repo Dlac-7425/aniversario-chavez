@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Netlify
+.netlify/
+
+# Logs y node_modules (si en el futuro agregás tooling)
+*.log
+node_modules/
