@@ -116,7 +116,7 @@
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
       // Fallback sin GSAP
       document.querySelectorAll(
-        '[data-reveal], .moment-card, .gallery-item, .letter-stanza, .letter-divider, .letter-final, .letter-signature, .closing-divider, .closing-message, .featured-frame, .featured-caption, .section-eyebrow'
+        '[data-reveal], .moment-card, .gallery-item, .letter-stanza, .letter-divider, .letter-final, .closing-divider, .closing-message, .section-eyebrow'
       ).forEach((el) => {
         el.style.opacity = '1';
         el.style.transform = 'none';
@@ -128,7 +128,7 @@
     gsap.set('[data-reveal]', { opacity: 0, y: 18, force3D: false });
     gsap.set('.moment-card', { opacity: 0, y: 25, force3D: false });
     gsap.set('.gallery-item', { opacity: 0, y: 18, force3D: false });
-    gsap.set('.letter-stanza, .letter-divider, .letter-final, .letter-signature', { opacity: 0, y: 18, force3D: false });
+    gsap.set('.letter-stanza, .letter-divider, .letter-final', { opacity: 0, y: 18, force3D: false });
     gsap.set('.closing-divider', { opacity: 0, y: 12, force3D: false });
     gsap.set('.closing-message', { opacity: 0, y: 22, force3D: false });
 
@@ -184,7 +184,7 @@
     });
 
     // ---- Letter stanzas (stagger) ----
-    gsap.utils.toArray('.letter-stanza, .letter-divider, .letter-final, .letter-signature').forEach((el, i) => {
+    gsap.utils.toArray('.letter-stanza, .letter-divider, .letter-final').forEach((el, i) => {
       gsap.to(el, {
         opacity: 1, y: 0,
         duration: 1.0,

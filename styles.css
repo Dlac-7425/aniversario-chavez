@@ -618,9 +618,9 @@ a.featured-photo:hover .featured-frame {
    -------------------------------- */
 .letter {
   background:
-    linear-gradient(180deg, var(--lila-50) 0%, var(--lila-100) 100%);
+    linear-gradient(180deg, var(--lila-75) 0%, var(--lila-50) 50%, var(--lila-100) 100%);
   text-align: center;
-  padding: 6rem 0 8rem;
+  padding: 4rem 0 8rem;
   position: relative;
 }
 
@@ -644,10 +644,10 @@ a.featured-photo:hover .featured-frame {
 }
 .letter-stanza p {
   font-family: var(--font-serif);
-  font-size: clamp(1.15rem, 3.6vw, 1.4rem);
-  line-height: 1.6;
+  font-size: clamp(1.1rem, 3.4vw, 1.35rem);
+  line-height: 1.7;
   color: var(--lila-800);
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.35rem;
   letter-spacing: 0.005em;
 }
 .letter-stanza p:last-child { margin-bottom: 0; }

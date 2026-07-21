@@ -23,6 +23,51 @@ MOMENTS = [
      'Sin anunciarlo, en silencio, entendí que eras tú. Y nunca más lo dudé.'),
 ]
 
+# Carta con estrofas — 14 años juntos
+LETTER_STANZAS = [
+    [
+        'Hoy, hace 14 años, comenzó la historia más bonita de mi vida.',
+        'Éramos solo dos enamorados llenos de sueños e ilusiones,',
+        'sin imaginar todo lo hermoso que el destino tenía preparado para nosotros.',
+    ],
+    [
+        'Hoy miro hacia atrás y siento un inmenso orgullo de todo lo que hemos construido.',
+        'Tenemos el regalo más hermoso de nuestro amor:',
+        'nuestro hijo de 5 años, que es nuestro mayor orgullo',
+        'y la razón por la que cada día queremos ser mejores.',
+    ],
+    [
+        'No todo ha sido fácil.',
+        'Hemos vivido momentos de felicidad,',
+        'pero también pruebas que nos hicieron más fuertes.',
+        'Y, a pesar de todo, aquí seguimos,',
+        'eligiéndonos cada día, tomados de la mano,',
+        'luchando por nuestros sueños y construyendo la familia que siempre imaginamos.',
+    ],
+    [
+        'Cada meta que alcanzamos es el reflejo de nuestro esfuerzo y del amor que nos une.',
+        'Hoy disfrutamos de nuestro hogar,',
+        'ese sueño que un día parecía tan lejano,',
+        'y sé que juntos seguiremos cumpliendo muchos más,',
+        'porque mientras estemos uno al lado del otro, no habrá sueño imposible.',
+    ],
+    [
+        'Gracias por estos 14 años de amor, paciencia, compañerismo y por nunca soltar mi mano.',
+        'Gracias por ser mi lugar seguro,',
+        'mi mejor amiga y el amor de mi vida.',
+    ],
+    [
+        'Te amo con todo mi corazón,',
+        'mucho más de lo que las palabras pueden expresar.',
+        'Mi mayor deseo es seguir escribiendo nuestra historia,',
+        'creando recuerdos, viendo crecer a nuestra familia',
+        'y compartiendo cada etapa de la vida contigo.',
+    ],
+    [
+        'Y como siempre nos prometíamos desde el principio...',
+    ],
+]
+
 
 def jpeg_size(path):
     try:
@@ -92,8 +137,19 @@ def build_gallery():
     return '\n'.join(items), len(gallery_files)
 
 
+def build_letter():
+    parts = []
+    for i, stanza in enumerate(LETTER_STANZAS):
+        if i > 0:
+            parts.append('<div class="letter-divider" aria-hidden="true">·  ·  ·</div>')
+        paras = '\n          '.join(f'<p>{line}</p>' for line in stanza)
+        parts.append(f'<div class="letter-stanza">\n          {paras}\n        </div>')
+    return '\n        '.join(parts)
+
+
 MOMENTS_HTML = build_moments()
 GALLERY_HTML, GALLERY_COUNT = build_gallery()
+LETTER_HTML = build_letter()
 
 HTML = f'''<!DOCTYPE html>
 <html lang="es">
@@ -120,7 +176,7 @@ HTML = f'''<!DOCTYPE html>
   <!-- Fallback sin JS: muestra elementos animados -->
   <noscript>
     <style>
-      a.gallery-item, .moment-card, [data-reveal], .closing-divider, .closing-message {{
+      a.gallery-item, .moment-card, [data-reveal], .closing-divider, .closing-message, .letter-stanza, .letter-divider, .letter-final {{
         opacity: 1 !important;
         transform: none !important;
       }}
@@ -156,6 +212,16 @@ HTML = f'''<!DOCTYPE html>
       </button>
     </div>
   </div>
+
+  <!-- CARTA -->
+  <section class="letter">
+    <div class="container">
+      <div class="letter-content">
+        {LETTER_HTML}
+        <p class="letter-final">#HastaViejitosTodaLaVida ❤️🥹</p>
+      </div>
+    </div>
+  </section>
 
   <!-- MOMENTOS -->
   <section id="momentos" class="moments">
