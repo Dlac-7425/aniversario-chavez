@@ -3,16 +3,12 @@
 Genera index.html con las imágenes de /public/images/.
 - Aspect ratios reales para cada foto (masonry Pinterest via CSS columns)
 - Cada 7ma foto es "featured" (column-span: all, ancho completo)
-- Polaroid en la foto principal
-- Carta con estrofas
 """
 import os, urllib.parse
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 IMG_DIR = os.path.join(ROOT, 'public', 'images')
 HTML_PATH = os.path.join(ROOT, 'index.html')
-
-MAIN = 'WhatsApp Image 2026-07-21 at 4.21.12 PM (4).jpeg'
 
 # 3 momentos
 MOMENTS = [
@@ -26,28 +22,6 @@ MOMENTS = [
      'Capítulo 3', 'El momento en que supe',
      'Sin anunciarlo, en silencio, entendí que eras tú. Y nunca más lo dudé.'),
 ]
-
-# Carta con estrofas (texto del usuario)
-LETTER_STANZAS = [
-    [
-        'Dicen que las mejores historias de amor',
-        'no se escriben en un solo día,',
-        'sino en el detalle de cada página compartida.',
-    ],
-    [
-        'Habrá capítulos difíciles, giros inesperados',
-        'o momentos de pausa...',
-    ],
-    [
-        'pero el hilo de nuestra historia siempre encuentra la forma',
-        'de seguir escribiendo momentos increíbles.',
-    ],
-    [
-        'Gracias por ser mi lugar favorito en el mundo',
-        'y mi historia favorita para contar.',
-    ],
-]
-LETTER_FINAL = 'Feliz aniversario, mi amor.'
 
 
 def jpeg_size(path):
@@ -101,7 +75,7 @@ def build_moments():
 def build_gallery():
     files = sorted(os.listdir(IMG_DIR))
     moment_names = {m[0] for m in MOMENTS}
-    gallery_files = [f for f in files if f != MAIN and f not in moment_names]
+    gallery_files = [f for f in files if f not in moment_names]
     items = []
     for i, fn in enumerate(gallery_files):
         src = u(fn)
@@ -118,33 +92,8 @@ def build_gallery():
     return '\n'.join(items), len(gallery_files)
 
 
-def build_featured():
-    src = u(MAIN)
-    sz = jpeg_size(os.path.join(IMG_DIR, MAIN))
-    return (
-        f'<a href="{src}" {img_attrs(MAIN)} class="featured-photo" target="_blank" rel="noreferrer">\n'
-        f'  <div class="featured-frame">\n'
-        f'    <img src="{src}" alt="Para Daniela" class="featured-image" loading="lazy" decoding="async" />\n'
-        f'    <span class="featured-stamp">21 · 07 · 2026</span>\n'
-        f'  </div>\n'
-        f'</a>'
-    )
-
-
-def build_letter():
-    parts = []
-    for i, stanza in enumerate(LETTER_STANZAS):
-        if i > 0:
-            parts.append('<div class="letter-divider" aria-hidden="true">·  ·  ·</div>')
-        paras = '\n          '.join(f'<p>{line}</p>' for line in stanza)
-        parts.append(f'<div class="letter-stanza">\n          {paras}\n        </div>')
-    return '\n        '.join(parts)
-
-
 MOMENTS_HTML = build_moments()
 GALLERY_HTML, GALLERY_COUNT = build_gallery()
-FEATURED_HTML = build_featured()
-LETTER_HTML = build_letter()
 
 HTML = f'''<!DOCTYPE html>
 <html lang="es">
@@ -167,6 +116,16 @@ HTML = f'''<!DOCTYPE html>
 
   <!-- PhotoSwipe v5 (lightbox) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css" />
+
+  <!-- Fallback sin JS: muestra elementos animados -->
+  <noscript>
+    <style>
+      a.gallery-item, .moment-card, [data-reveal], .closing-divider, .closing-message {{
+        opacity: 1 !important;
+        transform: none !important;
+      }}
+    </style>
+  </noscript>
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -198,23 +157,6 @@ HTML = f'''<!DOCTYPE html>
     </div>
   </div>
 
-  <!-- POLAROID + CARTA (combinados, primera sección post-intro) -->
-  <section class="featured-and-letter">
-    <div class="container">
-      <p class="section-eyebrow">Para vos</p>
-{FEATURED_HTML}
-      <p class="featured-caption">Cada vez que te miro, me enamoro otra vez.</p>
-
-      <div class="featured-letter-divider" aria-hidden="true">·  ·  ·</div>
-
-      <div class="letter-content">
-        {LETTER_HTML}
-        <p class="letter-final">Feliz aniversario, mi amor.</p>
-        <p class="letter-signature">— con amor, para siempre</p>
-      </div>
-    </div>
-  </section>
-
   <!-- MOMENTOS -->
   <section id="momentos" class="moments">
     <div class="container">
@@ -237,29 +179,6 @@ HTML = f'''<!DOCTYPE html>
 
       <div class="gallery-grid">
 {GALLERY_HTML}
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURED (polaroid) -->
-  <section class="featured">
-    <div class="container">
-      <p class="section-eyebrow" data-reveal>Para vos</p>
-{FEATURED_HTML}
-      <p class="featured-caption" data-reveal>Cada vez que te miro, me enamoro otra vez.</p>
-    </div>
-  </section>
-
-  <!-- LETTER (estrofas) -->
-  <section class="letter">
-    <div class="container">
-      <p class="section-eyebrow" data-reveal>Carta</p>
-      <h3 class="section-title" data-reveal>Lo que quiero decirte</h3>
-
-      <div class="letter-content">
-        {LETTER_HTML}
-        <p class="letter-final">Feliz aniversario, mi amor.</p>
-        <p class="letter-signature">— con amor, para siempre</p>
       </div>
     </div>
   </section>

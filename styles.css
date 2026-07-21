@@ -435,6 +435,7 @@ a.moment-card {
   transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.5s ease;
   color: inherit;
   position: relative;
+  opacity: 0;
 }
 a.moment-card::before {
   content: '';
@@ -515,9 +516,11 @@ a.gallery-item {
   overflow: hidden;
   border-radius: var(--radius-sm);
   background: linear-gradient(135deg, var(--lila-200), var(--lila-300));
+  aspect-ratio: 1 / 1;
   box-shadow: var(--shadow-xs);
   transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.5s ease;
   color: inherit;
+  opacity: 0;
 }
 a.gallery-item:hover {
   transform: translateY(-3px);

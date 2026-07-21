@@ -20,6 +20,16 @@
   <!-- PhotoSwipe v5 (lightbox) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css" />
 
+  <!-- Fallback sin JS: muestra elementos animados -->
+  <noscript>
+    <style>
+      a.gallery-item, .moment-card, [data-reveal], .closing-divider, .closing-message {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    </style>
+  </noscript>
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="intro-active">
@@ -49,47 +59,6 @@
       </button>
     </div>
   </div>
-
-  <!-- POLAROID + CARTA (combinados, primera sección post-intro) -->
-  <section class="featured-and-letter">
-    <div class="container">
-      <p class="section-eyebrow">Para vos</p>
-<a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%284%29.jpeg" data-pswp-width="1280" data-pswp-height="960" class="featured-photo" target="_blank" rel="noreferrer">
-  <div class="featured-frame">
-    <img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%284%29.jpeg" alt="Para Daniela" class="featured-image" loading="lazy" decoding="async" />
-    <span class="featured-stamp">21 · 07 · 2026</span>
-  </div>
-</a>
-      <p class="featured-caption">Cada vez que te miro, me enamoro otra vez.</p>
-
-      <div class="featured-letter-divider" aria-hidden="true">·  ·  ·</div>
-
-      <div class="letter-content">
-        <div class="letter-stanza">
-          <p>Dicen que las mejores historias de amor</p>
-          <p>no se escriben en un solo día,</p>
-          <p>sino en el detalle de cada página compartida.</p>
-        </div>
-        <div class="letter-divider" aria-hidden="true">·  ·  ·</div>
-        <div class="letter-stanza">
-          <p>Habrá capítulos difíciles, giros inesperados</p>
-          <p>o momentos de pausa...</p>
-        </div>
-        <div class="letter-divider" aria-hidden="true">·  ·  ·</div>
-        <div class="letter-stanza">
-          <p>pero el hilo de nuestra historia siempre encuentra la forma</p>
-          <p>de seguir escribiendo momentos increíbles.</p>
-        </div>
-        <div class="letter-divider" aria-hidden="true">·  ·  ·</div>
-        <div class="letter-stanza">
-          <p>Gracias por ser mi lugar favorito en el mundo</p>
-          <p>y mi historia favorita para contar.</p>
-        </div>
-        <p class="letter-final">Feliz aniversario, mi amor.</p>
-        <p class="letter-signature">— con amor, para siempre</p>
-      </div>
-    </div>
-  </section>
 
   <!-- MOMENTOS -->
   <section id="momentos" class="moments">
@@ -138,7 +107,7 @@
     <div class="container">
       <p class="section-eyebrow" data-reveal>Galería</p>
       <h3 class="section-title" data-reveal>Cada foto, una historia</h3>
-      <p class="section-sub" data-reveal>Tocá una foto para abrirla · 60 momentos</p>
+      <p class="section-sub" data-reveal>Tocá una foto para abrirla · 61 momentos</p>
 
       <div class="gallery-grid">
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.06%20PM.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.06%20PM.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.06%20PM.jpeg" alt="" loading="lazy" /></a>
@@ -166,88 +135,42 @@
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%281%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%281%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%281%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%282%29.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%283%29.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%284%29.jpeg" data-pswp-width="1280" data-pswp-height="960" class="gallery-item" style="aspect-ratio: 1280 / 960;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%284%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%285%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%285%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%285%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%281%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%281%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%281%29.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%282%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%281%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%281%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%281%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%282%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%283%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%284%29.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%284%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%285%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%285%29.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM%20%285%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.13%20PM.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%281%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%281%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%281%29.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%282%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%283%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%282%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%283%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%284%29.jpeg" data-pswp-width="1280" data-pswp-height="960" class="gallery-item" style="aspect-ratio: 1280 / 960;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%284%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%285%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%285%29.jpeg" data-pswp-width="1280" data-pswp-height="960" class="gallery-item" style="aspect-ratio: 1280 / 960;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM%20%285%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.14%20PM.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%281%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%281%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%281%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%282%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%283%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%284%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%284%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%283%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%284%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.15%20PM%20%284%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%281%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%281%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%281%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%282%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%283%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%284%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%284%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%285%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%285%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM%20%285%29.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%281%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%281%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%281%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.16%20PM.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%281%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%281%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%281%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%282%29.jpeg" data-pswp-width="959" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 959 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%283%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%284%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM%20%284%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.17%20PM.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%281%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%281%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%281%29.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%282%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
-  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%283%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%282%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%282%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item gallery-item--featured" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%282%29.jpeg" alt="" loading="lazy" /></a>
+  <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%283%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%283%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%283%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%284%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%284%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%285%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%285%29.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM%20%285%29.jpeg" alt="" loading="lazy" /></a>
   <a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM.jpeg" data-pswp-width="960" data-pswp-height="1280" class="gallery-item" style="aspect-ratio: 960 / 1280;" target="_blank" rel="noreferrer"><img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.18%20PM.jpeg" alt="" loading="lazy" /></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURED (polaroid) -->
-  <section class="featured">
-    <div class="container">
-      <p class="section-eyebrow" data-reveal>Para vos</p>
-<a href="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%284%29.jpeg" data-pswp-src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%284%29.jpeg" data-pswp-width="1280" data-pswp-height="960" class="featured-photo" target="_blank" rel="noreferrer">
-  <div class="featured-frame">
-    <img src="public/images/WhatsApp%20Image%202026-07-21%20at%204.21.12%20PM%20%284%29.jpeg" alt="Para Daniela" class="featured-image" loading="lazy" decoding="async" />
-    <span class="featured-stamp">21 · 07 · 2026</span>
-  </div>
-</a>
-      <p class="featured-caption" data-reveal>Cada vez que te miro, me enamoro otra vez.</p>
-    </div>
-  </section>
-
-  <!-- LETTER (estrofas) -->
-  <section class="letter">
-    <div class="container">
-      <p class="section-eyebrow" data-reveal>Carta</p>
-      <h3 class="section-title" data-reveal>Lo que quiero decirte</h3>
-
-      <div class="letter-content">
-        <div class="letter-stanza">
-          <p>Dicen que las mejores historias de amor</p>
-          <p>no se escriben en un solo día,</p>
-          <p>sino en el detalle de cada página compartida.</p>
-        </div>
-        <div class="letter-divider" aria-hidden="true">·  ·  ·</div>
-        <div class="letter-stanza">
-          <p>Habrá capítulos difíciles, giros inesperados</p>
-          <p>o momentos de pausa...</p>
-        </div>
-        <div class="letter-divider" aria-hidden="true">·  ·  ·</div>
-        <div class="letter-stanza">
-          <p>pero el hilo de nuestra historia siempre encuentra la forma</p>
-          <p>de seguir escribiendo momentos increíbles.</p>
-        </div>
-        <div class="letter-divider" aria-hidden="true">·  ·  ·</div>
-        <div class="letter-stanza">
-          <p>Gracias por ser mi lugar favorito en el mundo</p>
-          <p>y mi historia favorita para contar.</p>
-        </div>
-        <p class="letter-final">Feliz aniversario, mi amor.</p>
-        <p class="letter-signature">— con amor, para siempre</p>
       </div>
     </div>
   </section>
