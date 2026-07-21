@@ -740,12 +740,27 @@ a.featured-photo:hover .featured-frame {
 
 .letter-final {
   font-family: var(--font-script);
-  font-size: clamp(2.2rem, 7vw, 3rem);
+  font-size: clamp(1.5rem, 7vw, 3rem);
   color: var(--lila-700);
   text-align: center;
   margin: 3rem 0 1rem;
   line-height: 1.2;
   font-weight: 400;
+  overflow-wrap: anywhere; /* red de seguridad si el script font se cuelga */
+  max-width: 100%;
+}
+
+@media (max-width: 559px) {
+  .letter-final {
+    /* Mobile: Great Vibes es una tip cursive ancha; el string sin espacios
+       "#HastaViejitosTodaLaVida + emojis" desborda la pantalla.
+       Reducimos el font-size y limitamos el ancho. */
+    font-size: 1.05rem;
+    max-width: 92vw;
+    margin-left: auto;
+    margin-right: auto;
+    letter-spacing: -0.01em;
+  }
 }
 
 .letter-signature {
@@ -781,6 +796,8 @@ a.featured-photo:hover .featured-frame {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  touch-action: manipulation; /* sin delay de double-tap zoom en iOS */
+  -webkit-tap-highlight-color: transparent; /* sin highlight gris en tap iOS */
 }
 
 .music-toggle:hover {
