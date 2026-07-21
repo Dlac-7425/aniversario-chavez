@@ -286,7 +286,7 @@ HTML = f'''<!DOCTYPE html>
   </section>
 
   <!-- AUDIO DE FONDO (Sebastián Yatra - No hay nadie más) -->
-  <audio id="bgMusic" loop preload="auto">
+  <audio id="bgMusic" loop preload="auto" playsinline>
     <source src="{MUSIC_SRC}" type="audio/mpeg" />
   </audio>
 

@@ -766,7 +766,7 @@ a.featured-photo:hover .featured-frame {
   position: fixed;
   bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
   right: 1.25rem;
-  z-index: 100;
+  z-index: 10000;
   width: 48px;
   height: 48px;
   border-radius: 50%;

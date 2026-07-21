@@ -28,8 +28,93 @@
       gsap.registerPlugin(ScrollTrigger);
     }
     initIntro();
+    initMusic();
     initScrollAnimations();
     initLightbox();
+  }
+
+  // ============================================================
+  // 1.5. MUSIC PLAYER
+  // ============================================================
+  let musicControls = null;
+
+  function initMusic() {
+    const audio = document.getElementById('bgMusic');
+    const toggle = document.getElementById('musicToggle');
+    if (!audio || !toggle) return;
+
+    let isPlaying = false;
+    let fadeInterval = null;
+    const targetVolume = 0.5;
+
+    audio.volume = 0;
+
+    function clearFade() {
+      if (fadeInterval) { clearInterval(fadeInterval); fadeInterval = null; }
+    }
+
+    function fadeIn() {
+      clearFade();
+      const step = 0.025;
+      const interval = 80;
+      fadeInterval = setInterval(() => {
+        if (audio.volume < targetVolume - 0.01) {
+          audio.volume = Math.min(targetVolume, audio.volume + step);
+        } else {
+          audio.volume = targetVolume;
+          clearFade();
+        }
+      }, interval);
+    }
+
+    function fadeOut() {
+      clearFade();
+      const step = 0.04;
+      const interval = 50;
+      fadeInterval = setInterval(() => {
+        if (audio.volume > 0.01) {
+          audio.volume = Math.max(0, audio.volume - step);
+        } else {
+          audio.volume = 0;
+          clearFade();
+          audio.pause();
+        }
+      }, interval);
+    }
+
+    function play() {
+      // Esperar a que el audio esté listo si todavía no se cargó
+      if (audio.readyState < 2) {
+        audio.addEventListener('canplay', () => play(), { once: true });
+        return;
+      }
+
+      audio.play().then(() => {
+        isPlaying = true;
+        toggle.classList.add('is-playing');
+        toggle.setAttribute('aria-label', 'Pausar música');
+        fadeIn();
+      }).catch((err) => {
+        console.warn('No se pudo reproducir automáticamente:', err.message || err);
+      });
+    }
+
+    function pause() {
+      isPlaying = false;
+      toggle.classList.remove('is-playing');
+      toggle.setAttribute('aria-label', 'Activar música');
+      fadeOut();
+    }
+
+    toggle.addEventListener('click', () => {
+      if (isPlaying) {
+        pause();
+      } else {
+        play();
+      }
+    });
+
+    musicControls = { play, pause };
   }
 
   // ============================================================
@@ -80,6 +165,8 @@
       setTimeout(() => {
         if (intro.parentNode) intro.parentNode.removeChild(intro);
         playOpeningTimeline();
+        // Intentar autoplay de música (el click en "Abrir" es un user gesture)
+        if (musicControls) musicControls.play();
       }, 950);
     }
   }
