@@ -13,6 +13,11 @@
 (function () {
   'use strict';
 
+  // Las `let` deben declararse ANTES de whenReady(init) para evitar TDZ:
+  // init() llama a initMusic() y playOpeningTimeline(), que acceden a estas vars.
+  let musicControls = null;
+  let openingPlayed = false;
+
   function whenReady(cb) {
     if (typeof gsap !== 'undefined' && typeof PhotoSwipe !== 'undefined' && typeof PhotoSwipeLightbox !== 'undefined') {
       cb();
@@ -36,8 +41,6 @@
   // ============================================================
   // 1.5. MUSIC PLAYER
   // ============================================================
-  let musicControls = null;
-
   function initMusic() {
     const audio = document.getElementById('bgMusic');
     const toggle = document.getElementById('musicToggle');
@@ -174,7 +177,6 @@
   // ============================================================
   // 2. OPENING TIMELINE — polaroid entrance
   // ============================================================
-  let openingPlayed = false;
   function playOpeningTimeline() {
     if (openingPlayed) return;
     openingPlayed = true;
