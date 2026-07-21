@@ -86,20 +86,41 @@
     }
 
     function play() {
-      // Esperar a que el audio esté listo si todavía no se cargó
-      if (audio.readyState < 2) {
-        audio.addEventListener('canplay', () => play(), { once: true });
-        return;
-      }
-
-      audio.play().then(() => {
+      // iOS Safari NO desbloquea audio desde un listener asíncrono (canplay):
+      // el "user gesture context" se pierde apenas salimos del handler sincrónico.
+      // Por eso intentamos play() directo PRIMERO, y solo si falla esperamos
+      // a que el audio esté listo y reintentamos.
+      audio.volume = 0;
+      const direct = audio.play();
+      if (direct && typeof direct.then === 'function') {
+        direct.then(() => {
+          isPlaying = true;
+          toggle.classList.add('is-playing');
+          toggle.setAttribute('aria-label', 'Pausar música');
+          fadeIn();
+        }).catch((err) => {
+          // Caso típico en iOS: audio no terminado de cargar todavía.
+          // Reintentamos cuando dispare `canplay`.
+          if (audio.readyState < 4) {
+            audio.addEventListener('canplay', () => {
+              audio.play().then(() => {
+                isPlaying = true;
+                toggle.classList.add('is-playing');
+                toggle.setAttribute('aria-label', 'Pausar música');
+                fadeIn();
+              }).catch((e) => console.warn('Audio bloqueado:', e.message || e));
+            }, { once: true });
+          } else {
+            console.warn('No se pudo reproducir:', err.message || err);
+          }
+        });
+      } else {
+        // Browsers viejos sin promise en play()
         isPlaying = true;
         toggle.classList.add('is-playing');
         toggle.setAttribute('aria-label', 'Pausar música');
         fadeIn();
-      }).catch((err) => {
-        console.warn('No se pudo reproducir automáticamente:', err.message || err);
-      });
+      }
     }
 
     function pause() {
